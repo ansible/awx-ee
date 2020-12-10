@@ -1,0 +1,27 @@
+---
+- job:
+    name: awx-ee-build-container-image
+    parent: ansible-build-container-image
+    description: Build awx-ee container image
+    timeout: 2700
+    provides: awx-ee-container-image
+    requires: ansible-runner-container-image
+    vars: &vars
+      container_images: &container_images
+        - context: .
+          registry: quay.io
+          repository: quay.io/ansible/awx-ee
+          tags:
+            # If zuul.tag is defined: [ '3', '3.19', '3.19.0' ].  Only works for 3-component tags.
+            # Otherwise: ['latest']
+            &imagetag "{{ zuul.tag is defined | ternary([zuul.get('tag', '').split('.')[0], '.'.join(zuul.get('tag', '').split('.')[:2]), zuul.get('tag', '')], ['latest']) }}"
+      docker_images: *container_images
+
+- job:
+    name: awx-ee-upload-container-image
+    parent: ansible-upload-container-image
+    description: Build awx-ee container image and upload to quay.io
+    timeout: 2700
+    provides: awx-ee-container-image
+    requires: ansible-runner-container-image
+    vars: *vars

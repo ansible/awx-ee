@@ -1,0 +1,13 @@
+---
+- project:
+    check:
+      jobs:
+        - awx-ee-build-container-image
+    gate:
+      jobs:
+        - awx-ee-build-container-image
+    post:
+      jobs:
+        - awx-ee-upload-container-image:
+            vars:
+              upload_container_image_promote: false
