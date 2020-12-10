@@ -9,5 +9,3 @@ ADD bindep_output.txt /build/
 RUN dnf -y install $(cat /build/bindep_output.txt)
 ADD requirements_combined.txt /build/
 RUN pip3 install --upgrade -r /build/requirements_combined.txt
-COPY --from=quay.io/project-receptor/receptor /usr/bin/receptor /usr/bin/receptor
-RUN mkdir -m 0770 /var/run/receptor
