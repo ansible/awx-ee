@@ -1,6 +1,6 @@
 # AWX EE
 
-This is a work in progress.
+An Ansible Execution Environment for AWX project.
 
 ## Regenerating the build context:
 
