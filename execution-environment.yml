@@ -6,3 +6,4 @@ dependencies:
 additional_build_steps:
   prepend:
     - RUN pip3 install --upgrade pip setuptools
+    - RUN dnf config-manager --set-enabled epel

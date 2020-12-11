@@ -9,6 +9,7 @@ python3-pycurl [platform:rpm]  # from collection ovirt.ovirt
 python3-netaddr [platform:rpm]  # from collection ovirt.ovirt
 python3-jmespath [platform:rpm]  # from collection ovirt.ovirt
 python3-passlib [platform:rpm]  # from collection ovirt.ovirt
+gcc-c++ [platform:rpm]  # from collection user
 python3-devel [platform:rpm]  # from collection user
 subversion [platform:rpm]  # from collection user
 subversion [platform:dpkg]  # from collection user

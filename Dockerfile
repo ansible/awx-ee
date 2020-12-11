@@ -1,6 +1,7 @@
 FROM quay.io/ansible/ansible-runner:devel
 
 RUN pip3 install --upgrade pip setuptools
+RUN dnf config-manager --set-enabled epel
 ADD requirements.yml /build/
 
 RUN ansible-galaxy role install -r /build/requirements.yml --roles-path /usr/share/ansible/roles

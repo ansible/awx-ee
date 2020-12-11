@@ -1,3 +1,4 @@
+gcc-c++ [platform:rpm]
 python3-devel [platform:rpm]
 subversion [platform:rpm]
 subversion [platform:dpkg]
