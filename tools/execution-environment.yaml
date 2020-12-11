@@ -1,8 +1,8 @@
 ---
 version: 1
 dependencies:
-  galaxy: requirements/collections_requirements.yml
-  system: requirements/bindep_requirements.txt
+  galaxy: requirements.yaml
+  system: bindep.txt
 additional_build_steps:
   prepend:
     - RUN pip3 install --upgrade pip setuptools
