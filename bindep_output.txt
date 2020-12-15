@@ -5,4 +5,5 @@ python3-jmespath
 python3-netaddr
 python3-passlib
 python3-pycurl
+qemu-img
 subversion

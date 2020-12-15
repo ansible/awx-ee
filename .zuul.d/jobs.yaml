@@ -1,5 +1,24 @@
 ---
 - job:
+    name: awx-ee-tox-ansible-builder
+    parent: ansible-buildset-registry-consumer
+    timeout: 3600
+    vars:
+      container_command: podman
+
+- job:
+    name: awx-ee-tox-ansible-builder
+    parent: tox
+    requires:
+      - ansible-runner-container-image
+    required-projects:
+      - github.com/ansible/ansible-builder
+    nodeset: ubuntu-bionic-1vcpu
+    vars:
+      tox_envlist: ansible-builder
+      tox_install_siblings: false
+
+- job:
     name: awx-ee-build-container-image
     parent: ansible-build-container-image
     description: Build awx-ee container image
