@@ -3,9 +3,11 @@
     check:
       jobs:
         - awx-ee-build-container-image
+        - awx-ee-tox-ansible-builder
     gate:
       jobs:
         - awx-ee-build-container-image
+        - awx-ee-tox-ansible-builder
     post:
       jobs:
         - awx-ee-upload-container-image:
