@@ -1,4 +1,4 @@
-FROM quay.io/ansible/ansible-runner:devel as builder
+FROM quay.io/ansible/ansible-runner:devel as galaxy
 
 ADD requirements.yml /build/
 
@@ -7,13 +7,18 @@ RUN ansible-galaxy collection install -r /build/requirements.yml --collections-p
 
 RUN mkdir -p /usr/share/ansible/roles /usr/share/ansible/collections
 
+FROM quay.io/ansible/python-builder:latest as builder
+
+ADD requirements_combined.txt /tmp/src/requirements.txt
+ADD bindep_combined.txt /tmp/src/bindep.txt
+RUN assemble
+
 FROM quay.io/ansible/ansible-runner:devel
+
 RUN pip3 install --upgrade pip setuptools
 
-COPY --from=builder /usr/share/ansible/roles /usr/share/ansible/roles
-COPY --from=builder /usr/share/ansible/collections /usr/share/ansible/collections
+COPY --from=galaxy /usr/share/ansible/roles /usr/share/ansible/roles
+COPY --from=galaxy /usr/share/ansible/collections /usr/share/ansible/collections
 
-ADD bindep_output.txt /build/
-RUN dnf -y install $(cat /build/bindep_output.txt)
-ADD requirements_combined.txt /build/
-RUN pip3 install --upgrade -r /build/requirements_combined.txt
+COPY --from=builder /output/ /output/
+RUN /output/install-from-bindep && rm -rf /output/wheels
