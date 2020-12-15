@@ -15,7 +15,6 @@ RUN assemble
 
 FROM quay.io/ansible/ansible-runner:devel
 
-RUN pip3 install --upgrade pip setuptools
 
 COPY --from=galaxy /usr/share/ansible/roles /usr/share/ansible/roles
 COPY --from=galaxy /usr/share/ansible/collections /usr/share/ansible/collections
