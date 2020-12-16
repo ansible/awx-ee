@@ -21,3 +21,4 @@ COPY --from=galaxy /usr/share/ansible/collections /usr/share/ansible/collections
 
 COPY --from=builder /output/ /output/
 RUN /output/install-from-bindep && rm -rf /output/wheels
+RUN alternatives --set python /usr/bin/python3
