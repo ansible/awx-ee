@@ -27,6 +27,7 @@ azure-mgmt-dns==2.1.0  # from collection azure.azcollection
 azure-mgmt-keyvault==1.1.0  # from collection azure.azcollection
 azure-mgmt-marketplaceordering==0.1.0  # from collection azure.azcollection
 azure-mgmt-monitor==0.5.2  # from collection azure.azcollection
+azure-mgmt-managedservices==1.0.0  # from collection azure.azcollection
 azure-mgmt-network==10.2.0  # from collection azure.azcollection
 azure-mgmt-nspkg==2.0.0  # from collection azure.azcollection
 azure-mgmt-privatedns==0.1.0  # from collection azure.azcollection
@@ -47,7 +48,7 @@ azure-graphrbac==0.61.1  # from collection azure.azcollection
 azure-mgmt-cosmosdb==0.5.2  # from collection azure.azcollection
 azure-mgmt-hdinsight==0.1.0  # from collection azure.azcollection
 azure-mgmt-devtestlabs==3.0.0  # from collection azure.azcollection
-azure-mgmt-loganalytics==0.2.0  # from collection azure.azcollection
+azure-mgmt-loganalytics==1.0.0  # from collection azure.azcollection
 azure-mgmt-automation==0.1.1  # from collection azure.azcollection
 azure-mgmt-iothub==0.7.0  # from collection azure.azcollection
 openshift>=0.6.2  # from collection community.kubernetes
