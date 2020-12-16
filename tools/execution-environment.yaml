@@ -1,5 +1,0 @@
----
-version: 1
-dependencies:
-  galaxy: requirements.yaml
-  system: bindep.txt

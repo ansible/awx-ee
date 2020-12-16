@@ -1,0 +1,5 @@
+---
+version: 1
+dependencies:
+  galaxy: sources/requirements.yml
+  system: sources/bindep.txt
