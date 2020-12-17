@@ -11,6 +11,7 @@
     parent: tox
     requires:
       - ansible-runner-container-image
+      - python-builder-container-image
     required-projects:
       - github.com/ansible/ansible-builder
     nodeset: ubuntu-bionic-1vcpu
@@ -24,7 +25,9 @@
     description: Build awx-ee container image
     timeout: 2700
     provides: awx-ee-container-image
-    requires: ansible-runner-container-image
+    requires:
+      - ansible-runner-container-image
+      - python-builder-container-image
     vars: &vars
       container_images: &container_images
         - context: .
@@ -42,5 +45,7 @@
     description: Build awx-ee container image and upload to quay.io
     timeout: 2700
     provides: awx-ee-container-image
-    requires: ansible-runner-container-image
+    requires:
+      - ansible-runner-container-image
+      - python-builder-container-image
     vars: *vars
