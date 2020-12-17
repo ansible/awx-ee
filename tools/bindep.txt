@@ -1,3 +1,4 @@
 python3-devel [platform:rpm compile]
 subversion [platform:rpm]
 subversion [platform:dpkg]
+glibc-langpack-en [platform:rpm]
