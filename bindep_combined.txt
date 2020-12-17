@@ -13,7 +13,7 @@ python3-netaddr [platform:rpm]  # from collection ovirt.ovirt
 python3-jmespath [platform:rpm]  # from collection ovirt.ovirt
 python3-passlib [platform:rpm epel]  # from collection ovirt.ovirt
 qemu-img [platform:rpm]  # from collection ovirt.ovirt
-python3-devel [platform:rpm compile]  # from collection user
+python38-devel [platform:rpm compile]  # from collection user
 subversion [platform:rpm]  # from collection user
 subversion [platform:dpkg]  # from collection user
 glibc-langpack-en [platform:rpm]  # from collection user
