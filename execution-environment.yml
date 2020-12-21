@@ -1,8 +1,8 @@
 ---
 version: 1
 dependencies:
-  galaxy: requirements.yaml
-  system: bindep.txt
+  galaxy: _build/requirements.yml
+  system: _build/bindep.txt
 additional_build_steps:
   append:
     - RUN alternatives --set python /usr/bin/python3
