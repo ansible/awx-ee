@@ -20,3 +20,4 @@ collections:
   # needs kubectl for yum / dnf / apt-get
   # needs to install snap, then use snap to install helm
   - name: ansible.posix
+  - name: redhatinsights.insights
