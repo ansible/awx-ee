@@ -11,3 +11,4 @@ collections:
   - name: kubernetes.core
   - name: ansible.posix
   - name: ansible.windows
+  - name: redhatinsights.insights
