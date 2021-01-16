@@ -4,10 +4,11 @@ ARG PYTHON_BUILDER_IMAGE=quay.io/ansible/python-builder:latest
 FROM $ANSIBLE_RUNNER_IMAGE as galaxy
 
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=
-ADD _build/requirements.yml /build/_build/requirements.yml
+ADD _build /build
 
-RUN ansible-galaxy role install -r /build/_build/requirements.yml --roles-path /usr/share/ansible/roles
-RUN ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r /build/_build/requirements.yml --collections-path /usr/share/ansible/collections
+WORKDIR /build
+RUN ansible-galaxy role install -r requirements.yml --roles-path /usr/share/ansible/roles
+RUN ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path /usr/share/ansible/collections
 
 FROM $PYTHON_BUILDER_IMAGE as builder
 ADD _build/requirements_combined.txt /tmp/src/requirements.txt
