@@ -12,7 +12,7 @@ collections:
     version: ee_req_install
     type: git
   - name: community.vmware  # has requirements.txt, but may add pyvcloud
-  - name: https://github.com/shanemcd/ovirt-ansible-collection
+  - name: https://github.com/oVirt/ovirt-ansible-collection
     type: git
   - name: https://github.com/ansible-collections/community.kubernetes.git
     type: git
