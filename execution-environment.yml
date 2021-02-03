@@ -8,3 +8,4 @@ additional_build_steps:
     - RUN alternatives --set python /usr/bin/python3
     - COPY --from=quay.io/shanemcd/receptor /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
+    - USER 1000
