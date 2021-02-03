@@ -33,7 +33,7 @@ azure-mgmt-nspkg==2.0.0  # from collection azure.azcollection
 azure-mgmt-privatedns==0.1.0  # from collection azure.azcollection
 azure-mgmt-redis==5.0.0  # from collection azure.azcollection
 azure-mgmt-resource==10.2.0  # from collection azure.azcollection
-azure-mgmt-rdbms==1.4.1  # from collection azure.azcollection
+azure-mgmt-rdbms==1.9.0  # from collection azure.azcollection
 azure-mgmt-servicebus==0.5.3  # from collection azure.azcollection
 azure-mgmt-sql==0.10.0  # from collection azure.azcollection
 azure-mgmt-storage==11.1.0  # from collection azure.azcollection
