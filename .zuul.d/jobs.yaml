@@ -23,7 +23,7 @@
     name: awx-ee-build-container-image
     parent: ansible-build-container-image
     description: Build awx-ee container image
-    timeout: 2700
+    timeout: 3600
     provides: awx-ee-container-image
     requires:
       - ansible-runner-container-image
@@ -43,7 +43,7 @@
     name: awx-ee-upload-container-image
     parent: ansible-upload-container-image
     description: Build awx-ee container image and upload to quay.io
-    timeout: 2700
+    timeout: 3600
     provides: awx-ee-container-image
     requires:
       - ansible-runner-container-image
