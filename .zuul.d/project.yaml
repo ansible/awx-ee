@@ -13,6 +13,11 @@
         - awx-ee-upload-container-image:
             vars:
               upload_container_image_promote: false
+    release:
+      jobs:
+        - awx-ee-upload-container-image:
+            vars:
+              upload_container_image_promote: false
     periodic:
       jobs:
         - awx-ee-upload-container-image:
