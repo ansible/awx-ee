@@ -26,3 +26,4 @@ COPY --from=quay.io/project-receptor/receptor:0.9.6 /usr/bin/receptor /usr/bin/r
 RUN mkdir -p /var/run/receptor
 ADD run.sh /run.sh
 CMD /run.sh
+USER 1000
