@@ -17,11 +17,13 @@ azure-mgmt-compute==10.0.0  # from collection azure.azcollection
 azure-mgmt-containerinstance==1.4.0  # from collection azure.azcollection
 azure-mgmt-containerregistry==2.0.0  # from collection azure.azcollection
 azure-mgmt-containerservice==9.1.0  # from collection azure.azcollection
+azure-mgmt-datalake-store==0.5.0  # from collection azure.azcollection
 azure-mgmt-dns==2.1.0  # from collection azure.azcollection
 azure-mgmt-keyvault==1.1.0  # from collection azure.azcollection
 azure-mgmt-marketplaceordering==0.1.0  # from collection azure.azcollection
 azure-mgmt-monitor==0.5.2  # from collection azure.azcollection
 azure-mgmt-managedservices==1.0.0  # from collection azure.azcollection
+azure-mgmt-managementgroups==0.2.0  # from collection azure.azcollection
 azure-mgmt-network==10.2.0  # from collection azure.azcollection
 azure-mgmt-nspkg==2.0.0  # from collection azure.azcollection
 azure-mgmt-privatedns==0.1.0  # from collection azure.azcollection
@@ -45,6 +47,8 @@ azure-mgmt-devtestlabs==3.0.0  # from collection azure.azcollection
 azure-mgmt-loganalytics==1.0.0  # from collection azure.azcollection
 azure-mgmt-automation==0.1.1  # from collection azure.azcollection
 azure-mgmt-iothub==0.7.0  # from collection azure.azcollection
+azure-mgmt-recoveryservices==0.4.0  # from collection azure.azcollection
+azure-mgmt-recoveryservicesbackup==0.6.0  # from collection azure.azcollection
 openshift>=0.6.2  # from collection community.kubernetes
 requests-oauthlib  # from collection community.kubernetes
 pyvmomi  # from collection community.vmware
@@ -53,5 +57,5 @@ google-auth  # from collection google.cloud
 openstacksdk>=0.44  # from collection openstack.cloud
 keystoneauth1>=3.4.0  # from collection openstack.cloud
 jsonpatch  # from collection openstack.cloud
-ovirt-engine-sdk-python>=4.4.0  # from collection ovirt.ovirt
+ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
 ipaddress  # from collection theforeman.foreman
