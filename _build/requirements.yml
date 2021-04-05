@@ -13,8 +13,7 @@ collections:
     type: git
   - name: community.vmware  # has requirements.txt, but may add pyvcloud
   - name: ovirt.ovirt
-  - name: https://github.com/ansible-collections/community.kubernetes.git
-    type: git
+  - name: kubernetes.core
   # adds openshift python lib
   # needs kubectl for yum / dnf / apt-get
   # needs to install snap, then use snap to install helm

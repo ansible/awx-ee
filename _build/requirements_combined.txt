@@ -49,11 +49,11 @@ azure-mgmt-automation==0.1.1  # from collection azure.azcollection
 azure-mgmt-iothub==0.7.0  # from collection azure.azcollection
 azure-mgmt-recoveryservices==0.4.0  # from collection azure.azcollection
 azure-mgmt-recoveryservicesbackup==0.6.0  # from collection azure.azcollection
-openshift>=0.6.2  # from collection community.kubernetes
-requests-oauthlib  # from collection community.kubernetes
 pyvmomi  # from collection community.vmware
 git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7'  # Python 2.6 is not supported  # from collection community.vmware
 google-auth  # from collection google.cloud
+openshift>=0.6.2  # from collection kubernetes.core
+requests-oauthlib  # from collection kubernetes.core
 openstacksdk>=0.44  # from collection openstack.cloud
 keystoneauth1>=3.4.0  # from collection openstack.cloud
 jsonpatch  # from collection openstack.cloud

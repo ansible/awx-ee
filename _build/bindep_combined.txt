@@ -1,4 +1,3 @@
-kubernetes-client [platform:fedora]  # from collection community.kubernetes
 openssl-devel [platform:rpm compile]  # from collection ovirt.ovirt
 gcc [platform:rpm compile]  # from collection ovirt.ovirt
 libcurl-devel [platform:rpm compile]  # from collection ovirt.ovirt
