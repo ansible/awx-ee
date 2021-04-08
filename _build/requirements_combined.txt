@@ -54,8 +54,6 @@ git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version
 google-auth  # from collection google.cloud
 openshift>=0.6.2  # from collection kubernetes.core
 requests-oauthlib  # from collection kubernetes.core
-openstacksdk>=0.44  # from collection openstack.cloud
-keystoneauth1>=3.4.0  # from collection openstack.cloud
-jsonpatch  # from collection openstack.cloud
+openstacksdk>=0.13  # from collection openstack.cloud
 ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
 ipaddress  # from collection theforeman.foreman
