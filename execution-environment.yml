@@ -11,3 +11,4 @@ additional_build_steps:
     - ADD run.sh /run.sh
     - CMD /run.sh
     - USER 1000
+    - RUN git lfs install
