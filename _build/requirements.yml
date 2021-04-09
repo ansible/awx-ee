@@ -10,3 +10,4 @@ collections:
   - name: ovirt.ovirt
   - name: kubernetes.core
   - name: ansible.posix
+  - name: ansible.windows
