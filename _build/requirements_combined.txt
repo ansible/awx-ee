@@ -57,3 +57,4 @@ requests-oauthlib  # from collection kubernetes.core
 openstacksdk>=0.13  # from collection openstack.cloud
 ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
 ipaddress  # from collection theforeman.foreman
+pywinrm>=0.2.2  # from collection user
