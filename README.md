@@ -5,5 +5,5 @@ An Ansible Execution Environment for AWX project.
 ## Regenerating the build context:
 
 ```
-$ tox -ebuild
+$ tox -e podman # or -e docker
 ```
