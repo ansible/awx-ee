@@ -28,6 +28,7 @@
     requires:
       - ansible-runner-container-image
       - python-builder-container-image
+    nodeset: ubuntu-bionic-2vcpu
     vars: &vars
       container_images: &container_images
         - context: .
@@ -48,4 +49,5 @@
     requires:
       - ansible-runner-container-image
       - python-builder-container-image
+    nodeset: ubuntu-bionic-2vcpu
     vars: *vars
