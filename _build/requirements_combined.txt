@@ -5,7 +5,7 @@ pytz  # from collection awx.awx
 python-dateutil>=2.7.0  # from collection awx.awx
 awxkit  # from collection awx.awx
 packaging  # from collection azure.azcollection
-requests>=2.4.2  # from collection azure.azcollection,google.cloud,theforeman.foreman
+requests>=2.4.2  # from collection azure.azcollection,google.cloud,theforeman.foreman,servicenow.servicenow
 xmltodict  # from collection azure.azcollection
 azure-cli-core==2.11.1  # from collection azure.azcollection
 azure-cli-nspkg==3.0.2  # from collection azure.azcollection
@@ -57,3 +57,5 @@ requests-oauthlib  # from collection kubernetes.core
 openstacksdk>=0.13  # from collection openstack.cloud
 ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
 ipaddress  # from collection theforeman.foreman
+pysnow  # from collection servicenow.servicenow
+netaddr # from collection servicenow.servicenow
