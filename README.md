@@ -4,7 +4,7 @@
 
 An Ansible Execution Environment for AWX project.
 
-## Regenerating the build context with podman:
+## Regenerating the build context:
 
 ```bash
 $ tox -epodman
