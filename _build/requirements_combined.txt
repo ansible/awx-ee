@@ -59,3 +59,4 @@ ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
 ipaddress  # from collection theforeman.foreman
 pysnow  # from collection servicenow.servicenow
 netaddr # from collection servicenow.servicenow
+urllib3==1.25.11 # Quick fix
