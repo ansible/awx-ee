@@ -1,12 +1,20 @@
 boto>=2.49.0  # from collection amazon.aws
 botocore>=1.12.249  # from collection amazon.aws
 boto3>=1.9.249  # from collection amazon.aws
+ansible-pylibssh>=0.2.0  # from collection ansible.netcommon,cisco.ios
+jxmlease  # from collection ansible.netcommon
+ncclient  # from collection ansible.netcommon
+netaddr  # from collection ansible.netcommon,servicenow.servicenow
+paramiko  # from collection ansible.netcommon,cisco.ios
+xmltodict  # from collection ansible.netcommon,ansible.utils,azure.azcollection
+jsonschema  # from collection ansible.utils
+textfsm  # from collection ansible.utils
+ttp  # from collection ansible.utils
 pytz  # from collection awx.awx
 python-dateutil>=2.7.0  # from collection awx.awx
 awxkit  # from collection awx.awx
 packaging  # from collection azure.azcollection
-requests>=2.4.2  # from collection azure.azcollection,google.cloud,theforeman.foreman,servicenow.servicenow
-xmltodict  # from collection azure.azcollection
+requests>=2.4.2  # from collection azure.azcollection,google.cloud,servicenow.servicenow,theforeman.foreman
 azure-cli-core==2.11.1  # from collection azure.azcollection
 azure-cli-nspkg==3.0.2  # from collection azure.azcollection
 azure-common==1.1.11  # from collection azure.azcollection
@@ -56,5 +64,5 @@ openshift>=0.6.2  # from collection kubernetes.core
 requests-oauthlib  # from collection kubernetes.core
 openstacksdk>=0.13  # from collection openstack.cloud
 ovirt-engine-sdk-python>=4.4.10  # from collection ovirt.ovirt
+pysnow  # from collection servicenow.servicenow
 ipaddress  # from collection theforeman.foreman
-pysnow
