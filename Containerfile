@@ -2,6 +2,7 @@ ARG ANSIBLE_RUNNER_IMAGE=quay.io/ansible/ansible-runner:devel
 ARG PYTHON_BUILDER_IMAGE=quay.io/ansible/python-builder:latest
 
 FROM $ANSIBLE_RUNNER_IMAGE as galaxy
+USER root
 
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=
 ADD _build /build
@@ -16,6 +17,7 @@ ADD _build/bindep_combined.txt /tmp/src/bindep.txt
 RUN assemble
 
 FROM $ANSIBLE_RUNNER_IMAGE
+USER root
 
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
 
