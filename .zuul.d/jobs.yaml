@@ -37,6 +37,7 @@
             # If zuul.tag is defined: [ '3', '3.19', '3.19.0' ].  Only works for 3-component tags.
             # Otherwise: ['devel']
             &imagetag "{{ zuul.tag is defined | ternary([zuul.get('tag', '').split('.')[0], '.'.join(zuul.get('tag', '').split('.')[:2]), zuul.get('tag', '')], ['devel']) }}"
+      container_command_opts: --tag quay.io/ansible/ansible-navigator-demo-ee:latest
       docker_images: *container_images
 
 - job:
