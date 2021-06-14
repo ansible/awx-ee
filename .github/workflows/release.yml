@@ -29,13 +29,14 @@ jobs:
           
       - name: Retag image for navigator usage
         run: |
+         docker tag awx-ee:${{ github.event.release.tag_name }} ansible-navigator-demo-ee:${{ github.event.release.tag_name }}
          docker tag awx-ee:${{ github.event.release.tag_name }} ansible-navigator-demo-ee:latest
 
       - name: Push awx-ee
         uses: redhat-actions/push-to-registry@v2.1.1
         with:
           image: awx-ee
-          tags: ${{ github.event.release.tag_name }}
+          tags: ${{ github.event.release.tag_name }} latest
           registry: quay.io/ansible/
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_TOKEN }}
@@ -44,7 +45,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2.1.1
         with:
           image: ansible-navigator-demo-ee
-          tags: latest
+          tags: ${{ github.event.release.tag_name }}
           registry: quay.io/ansible/
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_TOKEN }}
