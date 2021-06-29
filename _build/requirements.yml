@@ -13,3 +13,6 @@ collections:
   - name: ansible.windows
   - name: redhatinsights.insights
   - name: servicenow.servicenow
+  - name: cisco.ios
+  - name: community.general
+  - name: ibm.power_aix
