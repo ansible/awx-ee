@@ -1,6 +1,7 @@
-# From upstream
-git+https://github.com/ansible/ansible-builder.git@devel#egg=ansible-builder
+# Upstream, but modified. 1.0 is out now, so shouldn't need to run devel anymore
+ansible-builder>=1.0
 # SEPE-specific, copied from GREQ0302203
+ansible>=4.0
 aiohttp
 hvac
 pyvmomi
