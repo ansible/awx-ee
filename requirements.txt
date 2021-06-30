@@ -1,1 +1,7 @@
+# From upstream
 git+https://github.com/ansible/ansible-builder.git@devel#egg=ansible-builder
+# SEPE-specific, copied from GREQ0302203
+aiohttp
+hvac
+pyvmomi
+jmespath
