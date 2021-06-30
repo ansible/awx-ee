@@ -1,6 +1,6 @@
-# AWX EE
+# SEPE AWX EE
 
-An Ansible Execution Environment for AWX project.
+A Custom Ansible Execution Environment for Platform Engineering.
 
 ## Regenerating the build context with podman:
 

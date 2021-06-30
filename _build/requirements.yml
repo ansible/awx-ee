@@ -12,3 +12,7 @@ collections:
   - name: ansible.posix
   - name: ansible.windows
   - name: redhatinsights.insights
+# SEPE additions (should speed up repo sync if installed here)
+  - name: community.general
+  - name: community.hashi_vault
+  - name: vmware.vmware_rest
