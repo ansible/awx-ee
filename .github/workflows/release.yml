@@ -26,12 +26,16 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           tox -e docker -- --tag=awx-ee:${{ github.event.release.tag_name }}
+
+      - name: Downcase repo path
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
           
       - name: Push awx-ee
         uses: redhat-actions/push-to-registry@v2.1.1
         with:
           image: awx-ee
           tags: ${{ github.event.release.tag_name }}
-          registry: ghcr.io/${{ github.repository }}
+          registry: ghcr.io/${{ env.REPO }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
