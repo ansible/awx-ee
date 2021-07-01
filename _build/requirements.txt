@@ -1,0 +1,6 @@
+# SEPE-specific, copied from GREQ0302203
+ansible>=4.0
+aiohttp
+hvac
+pyvmomi
+jmespath
