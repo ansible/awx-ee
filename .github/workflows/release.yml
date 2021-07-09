@@ -32,10 +32,10 @@ jobs:
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
           
       - name: Push awx-ee
-        uses: redhat-actions/push-to-registry@v2.1.1
+        uses: redhat-actions/push-to-registry@v2.3.1
         with:
           image: awx-ee
-          tags: ${{ github.event.release.tag_name }}
+          tags: latest ${{ github.event.release.tag_name }}
           registry: ghcr.io/${{ env.REPO }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
