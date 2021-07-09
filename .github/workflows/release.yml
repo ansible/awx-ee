@@ -26,7 +26,8 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           tox -e docker -- --tag=awx-ee:${{ github.event.release.tag_name }}
-
+          docker tag awx-ee:${{ github.event.release.tag_name }} awx-ee:latest
+          
       - name: Downcase repo path
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
