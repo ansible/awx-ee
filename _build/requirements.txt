@@ -1,6 +1,8 @@
 # SEPE-specific, copied from GREQ0302203
 ansible>=4.0
-aiohttp
+# Upstream hasn't packaged as collection yet: https://github.com/TerryHowe/ansible-modules-hashivault/issues/234
+ansible-modules-hashivault
+# Required by hashi_vault PR in to upstream: https://github.com/ansible-collections/community.hashi_vault/pull/105
 hvac
-pyvmomi
+# Required a number of places including community.general
 jmespath
