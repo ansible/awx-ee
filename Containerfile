@@ -1,4 +1,4 @@
-ARG EE_BASE_IMAGE=quay.io/ansible/ansible-runner:latest
+ARG EE_BASE_IMAGE=quay.io/ansible/ansible-runner:stable-2.11-devel
 ARG EE_BUILDER_IMAGE=quay.io/ansible/ansible-builder:latest
 
 FROM $EE_BASE_IMAGE as galaxy
