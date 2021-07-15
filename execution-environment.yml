@@ -6,6 +6,7 @@ dependencies:
 additional_build_steps:
   append:
     - RUN alternatives --set python /usr/bin/python3
+    - RUN pip3 install --upgrade pip urllib3 requests six xkcdpass
     - COPY --from=quay.io/project-receptor/receptor:1.0.0a2 /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
     - ADD run.sh /run.sh

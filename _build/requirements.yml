@@ -16,3 +16,4 @@ collections:
   - name: cisco.ios
   - name: community.general
   - name: ibm.power_aix
+  - name: community.cypto
