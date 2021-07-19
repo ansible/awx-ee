@@ -6,3 +6,5 @@ ansible-modules-hashivault
 hvac
 # Required a number of places including community.general
 jmespath
+# Required by community.general LDAP plugins
+python-ldap
