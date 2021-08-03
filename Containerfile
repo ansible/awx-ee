@@ -31,5 +31,4 @@ COPY --from=quay.io/project-receptor/receptor:1.0.0a2 /usr/bin/receptor /usr/bin
 RUN mkdir -p /var/run/receptor
 ADD run.sh /run.sh
 CMD /run.sh
-USER 1000
 RUN git lfs install
