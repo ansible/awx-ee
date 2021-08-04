@@ -31,7 +31,7 @@ jobs:
         run: |
          docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} quay.io/ansible/awx-ee:latest
          docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} quay.io/ansible/ansible-navigator-demo-ee:${{ github.event.release.tag_name }}
-         docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} ansible-navigator-demo-ee:latest
+         docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} quay.io/ansible/ansible-navigator-demo-ee:latest
 
       - name: Push images
         run: |
