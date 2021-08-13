@@ -1,4 +1,4 @@
-name: Release
+name: Build and Push latest image
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     - cron: '0 */12 * * *'
 
 jobs:
-  release:
+  build_and_push_latest:
     runs-on: ubuntu-20.04
     name: Build and push latest tag from devel and on new commits
     steps:
