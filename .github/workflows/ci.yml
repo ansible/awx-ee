@@ -4,10 +4,10 @@ name: CI
 
 on:
   pull_request:
-    branches: [devel]
+    branches: [main]
 
   push:
-    branches: [devel]
+    branches: [main]
 
 jobs:
   podman:

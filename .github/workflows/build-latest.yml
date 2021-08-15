@@ -2,12 +2,12 @@ name: Build and Push latest image
 
 on:
   push:
-    # build and push anytime commits are merged to devel
+    # build and push anytime commits are merged to main
     branches:
-      - devel
+      - main
   schedule:
-    # build every 12 hours
-    - cron: '0 */12 * * *'
+    # build every month
+    - cron: '0 0 1 * *'
 
 jobs:
   build_and_push_latest:
@@ -29,9 +29,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/ansible/awx-ee:latest
+          tox -e docker -- --tag=quay.io/lumarel/ee-default:latest
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/ansible/awx-ee:latest
+         docker push quay.io/lumarel/ee-default:latest
