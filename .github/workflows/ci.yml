@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-  push:
-    branches: [main]
-
 jobs:
   podman:
     runs-on: ubuntu-20.04
