@@ -1,3 +1,4 @@
-psutil
 netaddr
+psutil
+pycdlib
 git+https://github.com/vmware/vsphere-automation-sdk-python.git
