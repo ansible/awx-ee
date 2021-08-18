@@ -29,7 +29,7 @@ RUN /output/install-from-bindep && rm -rf /output/wheels
 RUN alternatives --set python /usr/bin/python3
 COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
 RUN mkdir -p /var/run/receptor
-ADD certs_* /etc/pki/ca-trust/source/anchors/
+ADD certs /etc/pki/ca-trust/source/anchors
 RUN update-ca-trust
 ADD run.sh /run.sh
 CMD /run.sh
