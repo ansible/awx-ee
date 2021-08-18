@@ -1,0 +1,5 @@
+psutil
+pyvmomi
+aiohttp
+netaddr
+git+https://github.com/vmware/vsphere-automation-sdk-python.git
