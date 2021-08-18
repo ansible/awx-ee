@@ -50,23 +50,23 @@ jobs:
         run: |
           tox -e docker
 
-  check_diff:
-    runs-on: ubuntu-20.04
-    name: Ensure build context is up-to-date
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.8"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Run
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e check-diff
+#  check_diff:
+#    runs-on: ubuntu-20.04
+#    name: Ensure build context is up-to-date
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - uses: actions/setup-python@v2
+#        with:
+#          python-version: "3.8"
+#
+#      - name: Install dependencies
+#        run: |
+#          python -m pip install --upgrade pip
+#          pip install tox
+#
+#      - name: Run
+#        env:
+#          DOCKER_BUILDKIT: 1
+#        run: |
+#          tox -e check-diff
