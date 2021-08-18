@@ -22,7 +22,7 @@ RUN assemble
 FROM $EE_BASE_IMAGE
 USER root
 
-COPY certs/* /etc/pki/ca-trust/source/anchors/
+ADD certs/* /etc/pki/ca-trust/source/anchors/
 RUN update-ca-trust
 
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
