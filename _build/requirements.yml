@@ -1,15 +1,16 @@
 ---
 collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
   - name: awx.awx
   - name: azure.azcollection
-  - name: amazon.aws
-  - name: theforeman.foreman
-  - name: google.cloud
-  - name: openstack.cloud
+  - name: community.crypto
+  - name: community.general
+  - name: community.kubernetes
   - name: community.vmware
-  - name: ovirt.ovirt
+  - name: community.zabbix
   - name: kubernetes.core
-  - name: ansible.posix
-  - name: ansible.windows
+  - name: netapp.ontap
   - name: redhatinsights.insights
   - name: vmware.vmware_rest
