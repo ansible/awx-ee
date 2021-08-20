@@ -37,7 +37,7 @@ jobs:
          docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}
          docker push quay.io/lumarel/ee-default:latest
 
-  release-stable-2.11:
+  release-stable-2_11:
     runs-on: ubuntu-20.04
     name: Release Ansible 2.11
     steps:
