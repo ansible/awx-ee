@@ -66,3 +66,4 @@ jobs:
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
          docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.11
+         docker push quay.io/lumarel/ee-default:stable-2.11
