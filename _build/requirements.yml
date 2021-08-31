@@ -3,6 +3,7 @@ collections:
   - name: ansible.netcommon
   - name: ansible.posix
   - name: ansible.utils
+  - name: ansible.windows
   - name: awx.awx
   - name: azure.azcollection
   - name: community.crypto
