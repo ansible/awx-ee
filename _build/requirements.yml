@@ -3,6 +3,7 @@ collections:
   - name: awx.awx
   - name: azure.azcollection
   - name: amazon.aws
+  - name: community.general
   - name: theforeman.foreman
   - name: google.cloud
   - name: openstack.cloud
