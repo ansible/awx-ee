@@ -1,3 +1,4 @@
+dnspython
 netaddr
 psutil
 pycdlib
