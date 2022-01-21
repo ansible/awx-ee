@@ -1,1 +1,2 @@
 git+https://github.com/ansible/ansible-builder.git@devel#egg=ansible-builder
+git+https://github.com/vmware/vsphere-automation-sdk-python.git
