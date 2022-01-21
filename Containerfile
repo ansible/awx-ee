@@ -24,6 +24,16 @@ USER root
 
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
 
+ADD _build/requirements.txt requirements.txt
+RUN ansible-builder introspect --sanitize --user-pip=requirements.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
+RUN assemble
+
+FROM $EE_BASE_IMAGE
+USER root
+RUN pip3 install --upgrade pip setuptools
+
+COPY --from=galaxy /usr/share/ansible /usr/share/ansible
+
 COPY --from=builder /output/ /output/
 RUN /output/install-from-bindep && rm -rf /output/wheels
 RUN alternatives --set python /usr/bin/python3
