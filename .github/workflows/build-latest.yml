@@ -1,14 +1,18 @@
-name: Release
+name: Build and Push latest image
 
 on:
-  release:
-    types:
-      - created
+  push:
+    # build and push anytime commits are merged to devel
+    branches:
+      - devel
+  schedule:
+    # build every 12 hours
+    - cron: '0 */12 * * *'
 
 jobs:
-  release:
+  build_and_push_latest:
     runs-on: ubuntu-20.04
-    name: Release
+    name: Build and push latest tag from devel and on new commits
     steps:
       - uses: actions/checkout@v2
 
@@ -25,13 +29,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=awx-ee:${{ github.event.release.tag_name }}
+          tox -e docker -- --tag=quay.io/saq/awx-ee:latest
 
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/saq/awx-ee:${{ github.event.release.tag_name }} quay.io/saq/awx-ee:latest
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/saq/awx-ee:${{ github.event.release.tag_name }}
          docker push quay.io/saq/awx-ee:latest
