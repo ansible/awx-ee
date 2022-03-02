@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-20.04
     name: Podman
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v3
         with:
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-20.04
     name: Docker
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v3
         with:
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-20.04
     name: Ensure build context is up-to-date
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v3
         with:
