@@ -2,4 +2,5 @@ dnspython
 netaddr
 psutil
 pycdlib
+urllib3 >= 1.26.0 # vsphere_copy mitigation
 git+https://github.com/vmware/vsphere-automation-sdk-python.git
