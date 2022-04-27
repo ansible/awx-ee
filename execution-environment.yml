@@ -8,12 +8,8 @@ dependencies:
 additional_build_steps:
   append:
     - RUN alternatives --set python /usr/bin/python3
-<<<<<<< HEAD
     - RUN pip3 install --upgrade pip urllib3 requests six xkcdpass
-    - COPY --from=quay.io/project-receptor/receptor:1.0.0a2 /usr/bin/receptor /usr/bin/receptor
-=======
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
->>>>>>> 98cf2d47d2024c7a40be6a78afe23720dbae13a8
     - RUN mkdir -p /var/run/receptor
     - ADD run.sh /run.sh
     - CMD /run.sh
