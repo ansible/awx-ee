@@ -4,9 +4,37 @@ collections:
   - name: azure.azcollection
   - name: amazon.aws
   - name: theforeman.foreman
+  - name: hetzner.hcloud
+  - name: chocolatey.chocolatey
   - name: google.cloud
   - name: openstack.cloud
   - name: community.vmware
+  - name: community.general
+  - name: community.aws
+  - name: community.azure
+  - name: community.ciscosmb
+  - name: community.crypto
+  - name: community.digitalocean
+  - name: community.dns
+  - name: community.docker
+  - name: community.fortios
+  - name: community.google
+  - name: community.grafana
+  - name: community.hashi_vaul
+  - name: community.hrobot
+  - name: community.libvirt
+  - name: community.mongodb
+  - name: community.mysql
+  - name: community.network
+  - name: community.okd
+  - name: community.postgresql
+  - name: community.proxysql
+  - name: community.rabbitmq
+  - name: community.routeros
+  - name: community.skydive
+  - name: community.sops
+  - name: community.windows
+  - name: community.zabbix
   - name: ovirt.ovirt
   - name: kubernetes.core
   - name: ansible.posix
