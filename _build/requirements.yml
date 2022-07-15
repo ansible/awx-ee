@@ -20,7 +20,7 @@ collections:
   - name: community.fortios
   - name: community.google
   - name: community.grafana
-  - name: community.hashi_vaul
+  - name: community.hashi_vault
   - name: community.hrobot
   - name: community.libvirt
   - name: community.mongodb
