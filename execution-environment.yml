@@ -8,8 +8,13 @@ dependencies:
 additional_build_steps:
   append:
     - RUN alternatives --set python /usr/bin/python3
-    - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
-    - RUN mkdir -p /var/run/receptor
+    # - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
+    # - RUN mkdir -p /var/run/receptor
+    - COPY --from=1password/op:2 /usr/local/bin/op /usr/bin/op
+    - COPY --from=imega/jq:latest /usr/bin/jq /usr/bin/jq
+    - COPY --from=imega/jq:latest /usr/lib/* /usr/lib/
+    - COPY --from=imega/jq:latest /lib/* /lib/
+    - COPY --from=hashicorp/packer:light /bin/packer /usr/sbin/packer
     - ADD run.sh /run.sh
     - CMD /run.sh
     - USER 1000
