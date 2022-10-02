@@ -18,7 +18,7 @@ COPY --from=galaxy /usr/share/ansible /usr/share/ansible
 
 ADD _build/requirements.txt requirements.txt
 ADD _build/bindep.txt bindep.txt
-RUN ansible-builder introspect --sanitize --user-pip=requirements.txt --user-bindep=bindep.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
+RUN ansible-builder introspect --sanitize --user-pip=requirements.txt --user-bindep=bindep.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt; sed -i s/vsphere-automation-sdk-python.git/vsphere-automation-sdk-python.git@46aa57de24420ead6af13fe4c8783f1ff66ffcfd/g /tmp/src/requirements.txt
 RUN assemble
 
 FROM $EE_BASE_IMAGE
