@@ -1,2 +1,2 @@
 git+https://github.com/ansible/ansible-sign
-cryptography==37.0.4
+ansible-runner>=2.2.1
