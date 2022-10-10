@@ -1,3 +1,5 @@
+ansible-runner>=2.2.1
+
 dnspython
 netaddr
 netapp-lib
