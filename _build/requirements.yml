@@ -7,6 +7,7 @@ collections:
   - name: google.cloud
   - name: openstack.cloud
   - name: community.vmware
+    version: '>=2.0.0,<3.0.0' # Pin to 2.x until ansible-runner is on 2.13+
   - name: ovirt.ovirt
   - name: kubernetes.core
   - name: ansible.posix
