@@ -7,7 +7,9 @@ collections:
   - name: google.cloud
   - name: openstack.cloud
   - name: community.vmware
-  - name: ovirt.ovirt
+  - name: https://github.com/shanemcd/ovirt-ansible-collection.git
+    type: git
+    version: test
   - name: kubernetes.core
   - name: ansible.posix
   - name: ansible.windows
