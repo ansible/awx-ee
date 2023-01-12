@@ -8,12 +8,12 @@ on:
 
 jobs:
   podman:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Podman
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
@@ -27,12 +27,12 @@ jobs:
           tox -e podman
 
   docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Docker
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
@@ -48,12 +48,12 @@ jobs:
           tox -e docker
 
 #  check_diff:
-#    runs-on: ubuntu-20.04
+#    runs-on: ubuntu-latest
 #    name: Ensure build context is up-to-date
 #    steps:
-#      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v3
 #
-#      - uses: actions/setup-python@v2
+#      - uses: actions/setup-python@v4
 #        with:
 #          python-version: "3.8"
 #

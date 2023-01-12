@@ -7,12 +7,12 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Release
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
@@ -38,12 +38,12 @@ jobs:
          docker push quay.io/lumarel/ee-default:latest
 
   release-stable-2_11:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Release Ansible 2.11
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
@@ -69,12 +69,12 @@ jobs:
          docker push quay.io/lumarel/ee-default:stable-2.11
 
   release-stable-2_12:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Release Ansible 2.12
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
