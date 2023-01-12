@@ -1,4 +1,4 @@
-ansible-runner>=2.2.1
+ansible-runner>=2.3.1
 
 dnspython
 netaddr
