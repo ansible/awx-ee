@@ -48,7 +48,7 @@ ADD https://raw.githubusercontent.com/ansible/python-builder-image/main/scripts/
 RUN chmod +x /usr/local/bin/install-from-bindep
 
 ADD https://raw.githubusercontent.com/ansible/ansible-runner/devel/utils/entrypoint.sh /usr/local/bin/entrypoint
-RUN chmod +x /usr/local/bin/entrypoint
+RUN chmod 755 /usr/local/bin/entrypoint
 
 ENTRYPOINT ["entrypoint"]
 
@@ -86,7 +86,6 @@ RUN for dir in \
 WORKDIR /runner
 # END (remove this when we move back to using ansible-builder)
 
-RUN alternatives --set python /usr/bin/python3
 COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
 RUN mkdir -p /var/run/receptor
 ADD run.sh /run.sh
