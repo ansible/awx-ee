@@ -7,7 +7,7 @@ collections:
   - name: google.cloud
   - name: openstack.cloud
   - name: community.vmware
-  - name: https://github.com/shanemcd/ovirt-ansible-collection.git
+  - name: https://github.com/oVirt/ovirt-ansible-collection.git
     type: git
     version: test
   - name: kubernetes.core
