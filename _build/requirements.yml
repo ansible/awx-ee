@@ -9,7 +9,7 @@ collections:
   - name: community.vmware
   - name: https://github.com/oVirt/ovirt-ansible-collection.git
     type: git
-    version: test
+    version: master
   - name: kubernetes.core
   - name: ansible.posix
   - name: ansible.windows
