@@ -21,7 +21,7 @@ FROM $EE_BUILDER_IMAGE as builder
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
 
 # BEGIN (remove this when we move back to using ansible-builder)
-RUN dnf install -y python3.9-pip && pip3 install -U pip && pip3 install ansible-builder wheel
+RUN dnf install -y python3.9-pip sshpass && pip3 install -U pip && pip3 install ansible-builder wheel
 # END (remove this when we move back to using ansible-builder)
 
 ADD _build/requirements.txt requirements.txt
