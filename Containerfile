@@ -62,8 +62,6 @@ RUN dnf install -y python3.9-pip && pip3 install -U pip
 
 RUN install-from-bindep && rm -rf /output/wheels
 
-RUN pip install dumb-init ansible-core
-
 # In OpenShift, container will run as a random uid number and gid 0. Make sure things
 # are writeable by the root group.
 RUN for dir in \
