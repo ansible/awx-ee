@@ -6,6 +6,7 @@ dumb-init
 
 ncclient
 paramiko
+pykerberos
 pyOpenSSL
 pypsrp[kerberos,credssp]
 pywinrm[kerberos,credssp]
