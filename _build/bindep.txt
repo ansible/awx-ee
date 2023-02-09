@@ -1,6 +1,7 @@
 python3.9-devel [platform:rpm compile]
 libcurl-devel [platform:rpm compile]
 krb5-devel [platform:rpm compile]
+krb5-workstation [platform:rpm]
 subversion [platform:rpm]
 subversion [platform:dpkg]
 git-lfs [platform:rpm]
