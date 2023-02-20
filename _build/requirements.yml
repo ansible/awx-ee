@@ -10,6 +10,7 @@ collections:
   - name: community.general
   - name: community.kubernetes
   - name: community.vmware
+    version: "<3.0.0"
   - name: community.zabbix
   - name: kubernetes.core
   - name: netapp.ontap
