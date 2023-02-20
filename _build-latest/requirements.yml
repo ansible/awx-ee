@@ -1,0 +1,18 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: ansible.windows
+  - name: awx.awx
+  - name: azure.azcollection
+  - name: community.crypto
+  - name: community.general
+  - name: community.kubernetes
+  - name: https://github.com/ansible-collections/community.vmware.git
+    type: git
+  - name: community.zabbix
+  - name: kubernetes.core
+  - name: netapp.ontap
+  - name: redhatinsights.insights
+  - name: vmware.vmware_rest
