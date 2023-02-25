@@ -6,8 +6,12 @@ collections:
   - name: theforeman.foreman
   - name: google.cloud
   - name: openstack.cloud
-  - name: community.vmware
-  - name: ovirt.ovirt
+  - name: https://github.com/relrod/community.vmware.git
+    type: git
+    version: pin-vsphere-automation-sdk-python
+  - name: https://github.com/shanemcd/ovirt-ansible-collection.git
+    type: git
+    version: master
   - name: kubernetes.core
   - name: ansible.posix
   - name: ansible.windows
