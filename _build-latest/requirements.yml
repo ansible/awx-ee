@@ -15,4 +15,5 @@ collections:
   - name: kubernetes.core
   - name: netapp.ontap
   - name: redhatinsights.insights
+  - name: theforeman.foreman
   - name: vmware.vmware_rest
