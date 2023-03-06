@@ -62,6 +62,9 @@ RUN dnf install -y python3.9-pip && pip3 install -U pip
 
 RUN install-from-bindep && rm -rf /output/wheels
 
+# python -> python3 SymLink (as in Automation Platform EEs)
+RUN alternatives --install /usr/bin/python python /usr/bin/python3.9 209
+
 # In OpenShift, container will run as a random uid number and gid 0. Make sure things
 # are writeable by the root group.
 RUN for dir in \
