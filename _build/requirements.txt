@@ -1,7 +1,7 @@
 git+https://github.com/ansible/ansible-sign
 ansible-runner>=2.3.1
 
-ansible-core
+git+https://github.com/ansible/ansible.git
 dumb-init
 
 ncclient
