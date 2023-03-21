@@ -1,7 +1,11 @@
 git+https://github.com/ansible/ansible-sign
 ansible-runner>=2.3.1
 
-ansible-core
+# We are carrying a backport into 2.14. We pin to <2.15 so we don't break
+# builds as soon as 2.15 drops. We should drop our backport and remove this pin
+# once 2.15 comes out.
+ansible-core<2.15
+
 dumb-init
 
 ncclient

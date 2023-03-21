@@ -62,6 +62,10 @@ RUN dnf install -y python3.9-pip && pip3 install -U pip
 
 RUN install-from-bindep && rm -rf /output/wheels
 
+ADD https://raw.githubusercontent.com/ansible/ansible/ff3ee9c4bdac68909bcb769091a198a7c45e6350/lib/ansible/cli/inventory.py \
+      /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
+RUN chmod 0644 /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
+
 # In OpenShift, container will run as a random uid number and gid 0. Make sure things
 # are writeable by the root group.
 RUN for dir in \
