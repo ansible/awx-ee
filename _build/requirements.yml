@@ -1,18 +1,17 @@
 ---
 collections:
-  - name: awx.awx
-  - name: azure.azcollection
-  - name: amazon.aws
-  - name: theforeman.foreman
-  - name: google.cloud
-  - name: openstack.cloud
-  - name: https://github.com/relrod/community.vmware.git
-    type: git
-    version: pin-vsphere-automation-sdk-python
-  - name: https://github.com/shanemcd/ovirt-ansible-collection.git
-    type: git
-    version: master
-  - name: kubernetes.core
-  - name: ansible.posix
-  - name: ansible.windows
-  - name: redhatinsights.insights
+- awx.awx
+- amazon.aws
+- ansible.posix
+- ansible.windows
+- awx.awx
+- azure.azcollection
+- community.vmware
+- google.cloud
+- kubernetes.core
+- openstack.cloud
+- ovirt.ovirt
+- redhatinsights.insights
+- theforeman.foreman
+- community.aws
+- community.general
