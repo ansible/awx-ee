@@ -82,4 +82,4 @@ jobs:
 
       - name: Push EE image
         run: |
-          docker push ghcr.io/thedatabaseme/awx-ee:nightly
+          docker push ghcr.io/daveshow/awx-ee:nightly
