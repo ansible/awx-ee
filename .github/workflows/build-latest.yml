@@ -79,7 +79,10 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: VERSION=${{ env.VERSION }}
 
+<<<<<<< HEAD
 
       - name: Push EE image
         run: |
           docker push ghcr.io/daveshow/awx-ee:nightly
+=======
+>>>>>>> origin/devel
