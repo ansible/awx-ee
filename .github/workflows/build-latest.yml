@@ -10,6 +10,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
+
   build_and_push_latest:
     runs-on: ubuntu-latest
     name: Build and push latest tag from devel and on new commits
@@ -44,7 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: daveshow/custom-awx-ee
+          images: daveshow/awx-ee
           flavor: |
             latest=auto
           tags: |
@@ -53,9 +54,18 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
 
-      - name: Build the context
+      - name: Build EE image
         run: |
-          ansible-builder create --output-filename Containerfile -c .
+          ansible-builder build \
+          --tag ghcr.io/daveshow/awx-ee:nightly \
+          --container-runtime docker \
+          -f execution-environment.yml \
+          -v 3
+
+
+      # - name: Build the context
+      #   run: |
+      #     ansible-builder create --output-filename Containerfile -c .
 
       - name: Build and push
         uses: docker/build-push-action@v3
@@ -69,3 +79,10 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: VERSION=${{ env.VERSION }}
 
+<<<<<<< HEAD
+
+      - name: Push EE image
+        run: |
+          docker push ghcr.io/daveshow/awx-ee:nightly
+=======
+>>>>>>> origin/devel
