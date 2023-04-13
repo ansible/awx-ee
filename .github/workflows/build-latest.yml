@@ -13,6 +13,9 @@ jobs:
 
   build_and_push_latest:
     runs-on: ubuntu-20.04
+    permissions:
+      packages: write
+      contents: read
     name: Build and push latest tag from devel and on new commits
     steps:
       - name: Checkout
@@ -53,7 +56,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: daveshow/awx-ee
+          images: |
+            daveshow/awx-ee
+            ghcr.io/${{ github.repository }}
           flavor: |
             latest=auto
           tags: |
@@ -76,7 +81,7 @@ jobs:
           ansible-builder create --output-filename Containerfile -c .
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64
