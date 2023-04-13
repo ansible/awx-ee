@@ -2,7 +2,7 @@
 version: 1
 build_arg_defaults:
   EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
-  EE_BUILDER_IMAGE: 'quay.io/ansible/ansible-builder:devel'
+  EE_BUILDER_IMAGE: 'quay.io/ansible/ansible-builder:latest'
 dependencies:
   galaxy: _build/requirements.yml
   system: _build/bindep.txt
