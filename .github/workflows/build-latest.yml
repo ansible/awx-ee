@@ -5,6 +5,8 @@ on:
     # build and push anytime commits are merged to devel
     branches:
       - devel
+    tags:
+      - v*
   schedule:
     # build every 12 hours
     - cron: '0 0 * * *'
