@@ -17,6 +17,7 @@ additional_build_steps:
     - COPY --from=imega/jq:latest /lib/* /lib/
     - COPY --from=hashicorp/packer:light /bin/packer /usr/sbin/packer
     - RUN mkdir -p /var/run/receptor
+    - RUN python -m pip uninstall -y ansible-core && python -m pip install --force ansible==2.9.27
     - ADD run.sh /run.sh
     - CMD /run.sh
     - USER 1000
