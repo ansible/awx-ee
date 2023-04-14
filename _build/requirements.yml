@@ -9,9 +9,7 @@ collections:
   - name: https://github.com/relrod/community.vmware.git
     type: git
     version: pin-vsphere-automation-sdk-python
-  - name: https://github.com/shanemcd/ovirt-ansible-collection.git
-    type: git
-    version: master
+  - name: ovirt.ovirt
   - name: kubernetes.core
   - name: ansible.posix
   - name: ansible.windows
