@@ -28,9 +28,9 @@ ADD _build/requirements.txt requirements.txt
 ADD _build/bindep.txt bindep.txt
 RUN ansible-builder introspect --sanitize --user-pip=requirements.txt --user-bindep=bindep.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
 # BEGIN (remove this when we move back to using ansible-builder)
-ADD https://raw.githubusercontent.com/ansible/python-builder-image/main/scripts/assemble /usr/local/bin
+ADD https://raw.githubusercontent.com/ansible/python-builder-image/847e1280be7734f9e18ee113458be2f539586016/scripts/assemble /usr/local/bin
 RUN chmod +x /usr/local/bin/assemble
-ADD https://raw.githubusercontent.com/ansible/python-builder-image/main/scripts/get-extras-packages /usr/local/bin
+ADD https://raw.githubusercontent.com/ansible/python-builder-image/847e1280be7734f9e18ee113458be2f539586016/scripts/get-extras-packages /usr/local/bin
 RUN chmod +x /usr/local/bin/get-extras-packages
 # END (remove this when we move back to using ansible-builder)
 RUN assemble
@@ -44,10 +44,10 @@ COPY --from=builder /output/ /output/
 
 
 # BEGIN (remove this when we move back to using ansible-builder)
-ADD https://raw.githubusercontent.com/ansible/python-builder-image/main/scripts/install-from-bindep /usr/local/bin
+ADD https://raw.githubusercontent.com/ansible/python-builder-image/847e1280be7734f9e18ee113458be2f539586016/scripts/install-from-bindep /usr/local/bin
 RUN chmod +x /usr/local/bin/install-from-bindep
 
-ADD https://raw.githubusercontent.com/ansible/ansible-runner/devel/utils/entrypoint.sh /usr/local/bin/entrypoint
+ADD https://raw.githubusercontent.com/ansible/ansible-runner/2.3.2/utils/entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod 755 /usr/local/bin/entrypoint
 
 ENTRYPOINT ["entrypoint"]
