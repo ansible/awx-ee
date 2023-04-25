@@ -20,9 +20,7 @@ dependencies:
       - name: theforeman.foreman
       - name: google.cloud
       - name: openstack.cloud
-      - name: https://github.com/relrod/community.vmware.git
-        type: git
-        version: pin-vsphere-automation-sdk-python
+      - name: community.vmware
       - name: ovirt.ovirt
       - name: kubernetes.core
       - name: ansible.posix
@@ -57,8 +55,6 @@ dependencies:
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip
-  prepend_galaxy:
-    - RUN dnf install -y git-core
   append_final:
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
