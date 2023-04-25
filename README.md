@@ -1,15 +1,13 @@
 # AWX EE
 
-An Ansible Execution Environment for AWX project.
+The default Execution Environment for AWX.
 
-## Regenerating the build context with podman:
+## Build the image locally
 
-```bash
-$ tox -epodman
-```
+First, [install ansible-builder](https://ansible-builder.readthedocs.io/en/stable/installation/).
 
-## Regenerating the build context with docker:
+Then run the following command from the root of this repo:
 
 ```bash
-$ tox -edocker
+$ ansible-builder build -v3 -t quay.io/ansible/awx-ee # --container-runtime=docker # Is podman by default
 ```
