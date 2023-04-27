@@ -3,14 +3,12 @@
 An Ansible execution environment for a private AWX - default set.
 This repo got forked from the ansible/awx-ee repo.
 
-## Regenerating the build context with podman
+## Build the image locally
+
+First, [install ansible-builder](https://ansible-builder.readthedocs.io/en/stable/installation/).
+
+Then run the following command from the root of this repo:
 
 ```bash
-$ tox -epodman
-```
-
-## Regenerating the build context with docker
-
-```bash
-$ tox -edocker
+$ ansible-builder build -v3 -t quay.io/ansible/awx-ee # --container-runtime=docker # Is podman by default
 ```
