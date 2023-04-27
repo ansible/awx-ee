@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -70,7 +70,7 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -88,15 +88,15 @@ jobs:
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
          docker push quay.io/lumarel/ee-default:stable-2.12
 
-  build_and_push_latest-el9-latest:
+  build_and_push_latest-stable-2_14:
     runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits EL9
+    name: Build and push latest tag from devel and on new commits Ansible 2.14
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -107,9 +107,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-el9-latest -- --tag=quay.io/lumarel/ee-default:el9-latest
+          tox -e docker-stable-2.14 -- --tag=quay.io/lumarel/ee-default:stable-2.14
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:el9-latest
+         docker push quay.io/lumarel/ee-default:stable-2.14

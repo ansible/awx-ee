@@ -1,0 +1,12 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: ansible.windows
+  - name: awx.awx
+  - name: community.crypto
+  - name: community.general
+  - name: community.vmware
+  - name: community.zabbix
+  - name: vmware.vmware_rest
