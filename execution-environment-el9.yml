@@ -1,7 +1,8 @@
 ---
 version: 3
 images:
-  base_image: quay.io/rockylinux/rockylinux:9
+  base_image:
+    name: quay.io/rockylinux/rockylinux:9
 dependencies:
   ansible_core:
     package_pip: ansible-core<2.15
