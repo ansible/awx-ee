@@ -10,9 +10,9 @@ on:
     - cron: '0 0 1 * *'
 
 jobs:
-  build_and_push_latest:
+  latest:
     runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits
+    name: Build latest
     steps:
       - uses: actions/checkout@v3
 
@@ -36,9 +36,16 @@ jobs:
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
          docker push quay.io/lumarel/ee-default:latest
 
-  build_and_push_latest-stable-2_11:
+  stable:
     runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.11
+    name: Build stable versions
+    needs: latest
+    strategy:
+      matrix:
+        version:
+          - "2.11"
+          - "2.12"
+          - "2.14"
     steps:
       - uses: actions/checkout@v3
 
@@ -55,16 +62,23 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.11 -- --tag=quay.io/lumarel/ee-default:stable-2.11
+          tox -e docker-stable-${{ matrix.version }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.11
+         docker push quay.io/lumarel/ee-default:stable-${{ matrix.version }}
 
-  build_and_push_latest-stable-2_12:
+  latest_types:
     runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.12
+    name: Build latest types
+    strategy:
+      matrix:
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
     steps:
       - uses: actions/checkout@v3
 
@@ -81,16 +95,26 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.12 -- --tag=quay.io/lumarel/ee-default:stable-2.12
+          tox -e docker-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.12
+         docker push quay.io/lumarel/ee-default:latest-${{ matrix.type }}
 
-  build_and_push_latest-stable-2_14:
+  stable_types:
     runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.14
+    name: Build stable types
+    needs: latest_types
+    strategy:
+      matrix:
+        version:
+          - "2.14"
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
     steps:
       - uses: actions/checkout@v3
 
@@ -107,217 +131,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.14 -- --tag=quay.io/lumarel/ee-default:stable-2.14
+          tox -e docker-stable-${{ matrix.version }}-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.14
-
-  build_and_push_latest-cloud:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-cloud -- --tag=quay.io/lumarel/ee-default:latest-cloud
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:latest-cloud
-
-  build_and_push_latest-network:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-network -- --tag=quay.io/lumarel/ee-default:latest-network
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:latest-network
-
-  build_and_push_latest-storage:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-storage -- --tag=quay.io/lumarel/ee-default:latest-storage
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:latest-storage
-
-  build_and_push_latest-sync:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-sync -- --tag=quay.io/lumarel/ee-default:latest-sync
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:latest-sync
-
-  build_and_push_latest-stable-2_14-cloud:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-cloud -- --tag=quay.io/lumarel/ee-default:stable-2.14-cloud
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.14-cloud
-
-  build_and_push_latest-stable-2_14-network:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-network -- --tag=quay.io/lumarel/ee-default:stable-2.14-network
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.14-network
-
-  build_and_push_latest-stable-2_14-storage:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-storage -- --tag=quay.io/lumarel/ee-default:stable-2.14-storage
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.14-storage
-
-  build_and_push_latest-stable-2_14-sync:
-    runs-on: ubuntu-latest
-    name: Build and push latest tag from devel and on new commits Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-sync -- --tag=quay.io/lumarel/ee-default:stable-2.14-sync
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:stable-2.14-sync
+         docker push quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }}

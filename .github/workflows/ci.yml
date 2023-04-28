@@ -9,7 +9,7 @@ on:
 jobs:
   podman:
     runs-on: ubuntu-latest
-    name: Podman
+    name: Build latest in Podman
     steps:
       - uses: actions/checkout@v3
 
@@ -22,13 +22,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
 
-      - name: Build EE with Podman
+      - name: Build image with Podman
         run: |
-          tox -e podman
+          tox -e podman -- --tag=quay.io/lumarel/ee-default:latest
 
-  docker:
+  latest:
     runs-on: ubuntu-latest
-    name: Docker
+    name: Build latest
     steps:
       - uses: actions/checkout@v3
 
@@ -41,8 +41,95 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
 
-      - name: Build EE with Docker
+      - name: Build image
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker
+          tox -e docker -- --tag=quay.io/lumarel/ee-default:latest
+
+  stable:
+    runs-on: ubuntu-latest
+    name: Build stable versions
+    needs: latest
+    strategy:
+      matrix:
+        version:
+          - "2.11"
+          - "2.12"
+          - "2.14"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker-stable-${{ matrix.version }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}
+
+  latest_types:
+    runs-on: ubuntu-latest
+    name: Build latest types
+    strategy:
+      matrix:
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }}
+
+  stable_types:
+    runs-on: ubuntu-latest
+    name: Build stable types
+    needs: latest_types
+    strategy:
+      matrix:
+        version:
+          - "2.14"
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker-stable-${{ matrix.version }}-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }}
