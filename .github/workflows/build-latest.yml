@@ -29,7 +29,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/lumarel/ee-default:latest
+          tox -e docker -- --tag=quay.io/lumarel/ee-default --tag=quay.io/lumarel/ee-default:latest
 
       - name: Push images
         run: |
@@ -60,7 +60,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }} --file=execution-environment-${{ matrix.version }}.yml
+          tox -e docker -- --tag=quay.io/lumarel/ee-default --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }} --file=execution-environment-${{ matrix.version }}.yml
 
       - name: Push images
         run: |
@@ -93,7 +93,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }} --file=execution-environment-${{ matrix.type }}.yml
+          tox -e docker -- --tag=quay.io/lumarel/ee-default --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }} --file=execution-environment-${{ matrix.type }}.yml
 
       - name: Push images
         run: |
@@ -129,9 +129,66 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }} --file=execution-environment-${{ matrix.version }}-${{ matrix.type }}.yml
+          tox -e docker -- --tag=quay.io/lumarel/ee-default --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }} --file=execution-environment-${{ matrix.version }}-${{ matrix.type }}.yml
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
          docker push quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }}
+
+  latest_lint:
+    runs-on: ubuntu-latest
+    name: Build lint latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker -- --tag=quay.io/lumarel/ee-lint --tag=quay.io/lumarel/ee-lint:latest --file=execution-environment-lint.yml
+
+      - name: Push images
+        run: |
+         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
+         docker push quay.io/lumarel/ee-lint:latest
+
+  stable_lint:
+    runs-on: ubuntu-latest
+    name: Build stable versions
+    needs: latest_lint
+    strategy:
+      matrix:
+        version:
+          - "2.14"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker -- --tag=quay.io/lumarel/ee-lint --tag=quay.io/lumarel/ee-lint:stable-${{ matrix.version }} --file=execution-environment-${{ matrix.version }}-lint.yml
+
+      - name: Push images
+        run: |
+         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
+         docker push quay.io/lumarel/ee-lint:stable-${{ matrix.version }}
