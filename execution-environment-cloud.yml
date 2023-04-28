@@ -8,9 +8,9 @@ dependencies:
     package_pip: ansible-core<2.15
   ansible_runner:
     package_pip: ansible-runner
-  galaxy: build-cloud/requirements.yml
-  python: build-cloud/requirements.txt
-  system: build-cloud/bindep.txt
+  galaxy: build/requirements-cloud.yml
+  python: build/requirements.txt
+  system: build/bindep.txt
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip

@@ -1,0 +1,24 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: ansible.windows
+  - name: awx.awx
+  - name: azure.azcollection
+  - name: cisco.asa
+  - name: cisco.dnac
+  - name: cisco.ios
+  - name: cisco.iosxr
+  - name: cisco.ise
+  - name: cisco.nxos
+  - name: community.crypto
+  - name: community.general
+  - name: community.kubernetes
+  - name: community.vmware
+  - name: community.zabbix
+  - name: kubernetes.core
+  - name: netapp.ontap
+  - name: redhatinsights.insights
+  - name: theforeman.foreman
+  - name: vmware.vmware_rest

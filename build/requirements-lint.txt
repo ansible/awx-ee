@@ -14,5 +14,13 @@ six
 
 dnspython
 netaddr
+netapp-lib
 psutil
 pycdlib
+
+ansible-lint
+molecule
+molecule-containers
+molecule-docker
+molecule-podman
+yamllint
