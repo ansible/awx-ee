@@ -39,6 +39,7 @@ jobs:
     strategy:
       matrix:
         version:
+          - "2.12"
           - "2.14"
     steps:
       - uses: actions/checkout@v3
@@ -165,6 +166,7 @@ jobs:
     strategy:
       matrix:
         version:
+          - "2.12"
           - "2.14"
     steps:
       - uses: actions/checkout@v3
