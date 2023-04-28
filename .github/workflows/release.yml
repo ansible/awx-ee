@@ -6,9 +6,9 @@ on:
       - created
 
 jobs:
-  release:
+  release_latest:
     runs-on: ubuntu-latest
-    name: Release
+    name: Release latest
     steps:
       - uses: actions/checkout@v3
 
@@ -27,19 +27,21 @@ jobs:
         run: |
           tox -e docker -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}
 
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:${{ github.event.release.tag_name }} quay.io/lumarel/ee-default:latest
-
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
          docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}
-         docker push quay.io/lumarel/ee-default:latest
 
-  release-stable-2_11:
+  release_stable:
     runs-on: ubuntu-latest
-    name: Release Ansible 2.11
+    name: Release stable versions
+    needs: release_latest
+    strategy:
+      matrix:
+        version:
+          - "2.11"
+          - "2.12"
+          - "2.14"
     steps:
       - uses: actions/checkout@v3
 
@@ -56,21 +58,23 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.11 -- --tag=quay.io/lumarel/ee-default:stable-2.11
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.11 quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.11
+          tox -e docker-stable-${{ matrix.version }} -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-${{ matrix.version }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.11
-         docker push quay.io/lumarel/ee-default:stable-2.11
+         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-${{ matrix.version }}
 
-  release-stable-2_12:
+  release_latest_types:
     runs-on: ubuntu-latest
-    name: Release Ansible 2.12
+    name: Release latest types
+    strategy:
+      matrix:
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
     steps:
       - uses: actions/checkout@v3
 
@@ -87,21 +91,26 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.12 -- --tag=quay.io/lumarel/ee-default:stable-2.12
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.12 quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.12
+          tox -e docker-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-${{ matrix.type }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.12
-         docker push quay.io/lumarel/ee-default:stable-2.12
+         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-${{ matrix.type }}
 
-  release-stable-2_14:
+  release_stable_types:
     runs-on: ubuntu-latest
-    name: Release Ansible 2.14
+    name: Release stable types
+    needs: release_latest_types
+    strategy:
+      matrix:
+        version:
+          - "2.14"
+        type:
+          - cloud
+          - network
+          - storage
+          - sync
     steps:
       - uses: actions/checkout@v3
 
@@ -118,262 +127,9 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-2.14 -- --tag=quay.io/lumarel/ee-default:stable-2.14
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.14 quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14
+          tox -e docker-stable-${{ matrix.version }}-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-${{ matrix.version }}-${{ matrix.type }}
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14
-         docker push quay.io/lumarel/ee-default:stable-2.14
-
-  release-cloud:
-    runs-on: ubuntu-latest
-    name: Release
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-cloud -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-cloud
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-cloud quay.io/lumarel/ee-default:latest-cloud
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-cloud
-         docker push quay.io/lumarel/ee-default:latest-cloud
-
-  release-network:
-    runs-on: ubuntu-latest
-    name: Release
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-network -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-network
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-network quay.io/lumarel/ee-default:latest-network
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-network
-         docker push quay.io/lumarel/ee-default:latest-network
-
-  release-storage:
-    runs-on: ubuntu-latest
-    name: Release
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-storage -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-storage
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-storage quay.io/lumarel/ee-default:latest-storage
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-storage
-         docker push quay.io/lumarel/ee-default:latest-storage
-
-  release-sync:
-    runs-on: ubuntu-latest
-    name: Release
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-sync -- --tag=quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-sync
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-sync quay.io/lumarel/ee-default:latest-sync
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-sync
-         docker push quay.io/lumarel/ee-default:latest-sync
-
-  release-stable-2_14-cloud:
-    runs-on: ubuntu-latest
-    name: Release Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-cloud -- --tag=quay.io/lumarel/ee-default:stable-2.14-cloud
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.14-cloud quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-cloud
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-cloud
-         docker push quay.io/lumarel/ee-default:stable-2.14-cloud
-
-  release-stable-2_14-network:
-    runs-on: ubuntu-latest
-    name: Release Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-network -- --tag=quay.io/lumarel/ee-default:stable-2.14-network
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.14-network quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-network
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-network
-         docker push quay.io/lumarel/ee-default:stable-2.14-network
-
-  release-stable-2_14-storage:
-    runs-on: ubuntu-latest
-    name: Release Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-storage -- --tag=quay.io/lumarel/ee-default:stable-2.14-storage
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.14-storage quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-storage
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-storage
-         docker push quay.io/lumarel/ee-default:stable-2.14-storage
-
-  release-stable-2_14-sync:
-    runs-on: ubuntu-latest
-    name: Release Ansible 2.14
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
-
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker-stable-2.14-sync -- --tag=quay.io/lumarel/ee-default:stable-2.14-sync
-
-      - name: Apply latest tag
-        run: |
-         docker tag quay.io/lumarel/ee-default:stable-2.14-sync quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-sync
-
-      - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-2.14-sync
-         docker push quay.io/lumarel/ee-default:stable-2.14-sync
+         docker push quay.io/lumarel/ee-default:${{ github.event.release.tag_name }}-stable-${{ matrix.version }}-${{ matrix.type }}
