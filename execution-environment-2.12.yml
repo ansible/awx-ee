@@ -1,0 +1,25 @@
+---
+version: 3
+images:
+  base_image:
+    name: quay.io/rockylinux/rockylinux:9
+dependencies:
+  ansible_core:
+    package_pip: ansible-core==2.12.*
+  ansible_runner:
+    package_pip: ansible-runner
+  galaxy: build/requirements.yml
+  python: build/requirements.txt
+  system: build/bindep.txt
+additional_build_steps:
+  append_base:
+    - RUN $PYCMD -m pip install -U pip
+  prepend_builder:
+    - RUN dnf install -y epel-release
+  prepend_final:
+    - RUN dnf install -y epel-release
+  append_final:
+    - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
+    - RUN mkdir -p /var/run/receptor
+    - RUN git lfs install --system
+    - USER 1000

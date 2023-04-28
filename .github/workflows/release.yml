@@ -39,6 +39,7 @@ jobs:
     strategy:
       matrix:
         version:
+          - "2.12"
           - "2.14"
     steps:
       - uses: actions/checkout@v3
@@ -160,11 +161,12 @@ jobs:
 
   stable_lint:
     runs-on: ubuntu-latest
-    name: Build stable versions
+    name: Build stable lint versions
     needs: latest_lint
     strategy:
       matrix:
         version:
+          - "2.12"
           - "2.14"
     steps:
       - uses: actions/checkout@v3
