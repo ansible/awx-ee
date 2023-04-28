@@ -1,0 +1,11 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: ansible.windows
+  - name: azure.azcollection
+  - name: community.crypto
+  - name: community.general
+  - name: community.kubernetes
+  - name: kubernetes.core

@@ -1,0 +1,27 @@
+---
+version: 3
+images:
+  base_image:
+    name: quay.io/rockylinux/rockylinux:9
+dependencies:
+  ansible_core:
+    package_pip: ansible-core==2.14.*
+  ansible_runner:
+    package_pip: ansible-runner
+  galaxy: build-el9-storage/requirements.yml
+  python: build-el9-storage/requirements.txt
+  system: build-el9-storage/bindep.txt
+additional_build_steps:
+  append_base:
+    - RUN $PYCMD -m pip install -U pip
+  prepend_builder:
+    - RUN dnf install -y epel-release
+  prepend_final:
+    - RUN dnf install -y epel-release
+  append_final:
+    - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
+    - RUN mkdir -p /var/run/receptor
+    - ADD https://raw.githubusercontent.com/ansible/ansible/ff3ee9c4bdac68909bcb769091a198a7c45e6350/lib/ansible/cli/inventory.py /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
+    - RUN chmod 0644 /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
+    - RUN git lfs install --system
+    - USER 1000

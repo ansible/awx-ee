@@ -1,0 +1,8 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: community.crypto
+  - name: community.general
+  - name: netapp.ontap
