@@ -161,7 +161,7 @@ jobs:
 
   stable_lint:
     runs-on: ubuntu-latest
-    name: Build stable versions
+    name: Build stable lint versions
     needs: latest_lint
     strategy:
       matrix:
