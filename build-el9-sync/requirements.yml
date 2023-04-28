@@ -1,0 +1,6 @@
+---
+collections:
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: awx.awx
+  - name: theforeman.foreman
