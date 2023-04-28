@@ -54,8 +54,6 @@ jobs:
     strategy:
       matrix:
         version:
-          - "2.11"
-          - "2.12"
           - "2.14"
     steps:
       - uses: actions/checkout@v3
@@ -73,7 +71,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-${{ matrix.version }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}
+          tox -e docker -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }} --file=execution-environment-${{ matrix.version }}.yml
 
   latest_types:
     runs-on: ubuntu-latest
@@ -101,7 +99,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }}
+          tox -e docker -- --tag=quay.io/lumarel/ee-default:latest-${{ matrix.type }} --file=execution-environment-${{ matrix.type }}.yml
 
   stable_types:
     runs-on: ubuntu-latest
@@ -132,4 +130,4 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker-stable-${{ matrix.version }}-${{ matrix.type }} -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }}
+          tox -e docker -- --tag=quay.io/lumarel/ee-default:stable-${{ matrix.version }}-${{ matrix.type }} --file=execution-environment-${{ matrix.version }}-${{ matrix.type }}.yml
