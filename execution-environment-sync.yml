@@ -5,12 +5,12 @@ images:
     name: quay.io/rockylinux/rockylinux:9
 dependencies:
   ansible_core:
-    package_pip: ansible-core==2.14.*
+    package_pip: ansible-core<2.15
   ansible_runner:
     package_pip: ansible-runner
-  galaxy: build-el9-sync/requirements.yml
-  python: build-el9-sync/requirements.txt
-  system: build-el9-sync/bindep.txt
+  galaxy: build-sync/requirements.yml
+  python: build-sync/requirements.txt
+  system: build-sync/bindep.txt
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip

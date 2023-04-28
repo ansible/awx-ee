@@ -1,8 +1,0 @@
-ansible-runner>=2.3.1
-
-dnspython
-netaddr
-netapp-lib
-psutil
-pycdlib
-git+https://github.com/vmware/vsphere-automation-sdk-python.git
