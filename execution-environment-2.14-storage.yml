@@ -23,5 +23,7 @@ additional_build_steps:
     - RUN mkdir -p /var/run/receptor
     - ADD https://raw.githubusercontent.com/ansible/ansible/ff3ee9c4bdac68909bcb769091a198a7c45e6350/lib/ansible/cli/inventory.py /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
     - RUN chmod 0644 /usr/local/lib/python3.9/site-packages/ansible/cli/inventory.py
+    - ADD certs /etc/pki/ca-trust/source/anchors
+    - RUN update-ca-trust
     - RUN git lfs install --system
     - USER 1000

@@ -19,6 +19,8 @@ additional_build_steps:
   prepend_final:
     - RUN dnf install -y epel-release
   append_final:
+    - ADD certs /etc/pki/ca-trust/source/anchors
+    - RUN update-ca-trust
     - RUN git lfs install --system
     - ENTRYPOINT []
     - ENV SHELL /bin/bash
