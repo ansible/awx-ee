@@ -9,4 +9,5 @@ collections:
   - name: community.general
   - name: community.vmware
   - name: community.zabbix
+    version: <2.0.0
   - name: vmware.vmware_rest
