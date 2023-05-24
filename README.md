@@ -4,8 +4,10 @@ The default Execution Environment for AWX.
 
 ## Build the AWX-EE image locally
 
-Building AWX-EE requires [ansible-builder](https://ansible-builder.readthedocs.io/en/stable/installation/)
-_*AWX-EE currently requires a pre-release version (v3 rc2) of ansible-builder which can be installed with the `--pre` flag:_
+First, [install ansible-builder](https://ansible-builder.readthedocs.io/en/stable/installation/).
+
+Then run the following command from the root of this repo:
+
 ```
 pip install --pre ansible-builder
 ```
