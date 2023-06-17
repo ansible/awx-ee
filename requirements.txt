@@ -1,1 +1,1 @@
-git+https://github.com/ansible/ansible-builder.git@09d8f6e9b2fb0b9bf26db5eb7eea63015908c068#egg=ansible-builder
+git+https://github.com/ansible/ansible-builder.git@release_3.0#egg=ansible-builder
