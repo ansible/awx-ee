@@ -24,4 +24,3 @@ additional_build_steps:
     - ADD certs /etc/pki/ca-trust/source/anchors
     - RUN update-ca-trust
     - RUN git lfs install --system
-    - USER 1000
