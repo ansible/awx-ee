@@ -41,6 +41,7 @@ jobs:
         version:
           - "2.12"
           - "2.14"
+          - "2.15"
     steps:
       - uses: actions/checkout@v3
 
@@ -105,6 +106,7 @@ jobs:
       matrix:
         version:
           - "2.14"
+          - "2.15"
         type:
           - cloud
           - network
@@ -168,6 +170,7 @@ jobs:
         version:
           - "2.12"
           - "2.14"
+          - "2.15"
     steps:
       - uses: actions/checkout@v3
 
