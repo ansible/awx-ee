@@ -39,6 +39,7 @@ dependencies:
     sshpass [platform:rpm]
     rsync [platform:rpm]
     epel-release [platform:rpm]
+    unzip [platform:rpm]
   python: |
     git+https://github.com/ansible/ansible-sign
     ncclient
