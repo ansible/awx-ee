@@ -23,6 +23,7 @@ dependencies:
       - name: kubernetes.core
       - name: ansible.posix
       - name: ansible.windows
+      - name: ansible.utils
       - name: redhatinsights.insights
   system: |
     git-core [platform:rpm]
@@ -51,6 +52,7 @@ dependencies:
     python-daemon
     pyyaml
     six
+    google-cloud-storage
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip
