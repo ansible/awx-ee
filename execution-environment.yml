@@ -58,3 +58,4 @@ additional_build_steps:
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
     - RUN git lfs install --system
+    - RUN mkdir -p $($PYCMD -m site --user-site | sed "s#/root#$(pwd)#")
