@@ -38,6 +38,7 @@ dependencies:
     epel-release [platform:rpm]
     python-unversioned-command [platform:rpm]
     unzip [platform:rpm]
+    podman-remote [platform:rpm]
   python: |
     git+https://github.com/ansible/ansible-sign
     ncclient
