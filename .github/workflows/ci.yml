@@ -33,6 +33,12 @@ jobs:
     runs-on: ubuntu-20.04
     name: Docker
     steps:
+      - name: Install QEMU static binaries
+        uses: docker/setup-qemu-action@v2
+
+      - name: Configure Buildkit
+        uses: docker/setup-buildx-action@v2
+
       - uses: actions/checkout@v2
 
       - uses: actions/setup-python@v2
@@ -44,8 +50,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
 
-      - name: Build EE with Docker
-        env:
-          DOCKER_BUILDKIT: 1
+      - name: Create build context for Docker
         run: |
-          tox -e docker
+          tox -e docker-create
+
+      - name: Build EE with Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: context
+          file: context/Dockerfile
+          push: false
+          platforms: |
+            linux/amd64
+            linux/arm64
+          tags: |
+            quay.io/ansible/awx-ee:latest
