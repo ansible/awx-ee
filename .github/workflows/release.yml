@@ -25,14 +25,14 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/ansible/awx-ee:${{ github.event.release.tag_name }}
+          tox -e docker -- --tag=ghcr.io/ctrliq/ascender-ee:${{ github.event.release.tag_name }}
 
       - name: Apply latest tag
         run: |
-         docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} quay.io/ansible/awx-ee:latest
+         docker tag ghcr.io/${{ github.repository_owner }}/ascender-ee:${{ github.event.release.tag_name }} ghcr.io/${{ github.repository_owner }}/ascender-ee:latest
 
       - name: Push images
         run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/ansible/awx-ee:${{ github.event.release.tag_name }}
-         docker push quay.io/ansible/awx-ee:latest
+         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+         docker push ghcr.io/${{ github.repository_owner }}/ascender-ee:${{ github.event.release.tag_name }}
+         docker push ghcr.io/${{ github.repository_owner }}/ascender-ee:latest

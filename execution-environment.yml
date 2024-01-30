@@ -2,7 +2,7 @@
 version: 3
 images:
   base_image:
-    name: quay.io/centos/centos:stream9
+    name: rockylinux:9
 dependencies:
   ansible_core:
     # Require minimum of 2.15 to get ansible-inventory --limit option
@@ -23,9 +23,10 @@ dependencies:
       - name: kubernetes.core
       - name: ansible.posix
       - name: ansible.windows
-      - name: redhatinsights.insights
   system: |
     git-core [platform:rpm]
+    gcc [platform:rpm]
+    gcc-c++ [platform:rpm]
     python3.9-devel [platform:rpm compile]
     libcurl-devel [platform:rpm compile]
     krb5-devel [platform:rpm compile]
