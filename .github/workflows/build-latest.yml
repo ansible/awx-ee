@@ -25,13 +25,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
 
+      - name: Quay login
+        run: |
+          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
+
       - name: Build image
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/ansible/awx-ee:latest
+          tox -e docker -- --tag=${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
 
       - name: Push images
         run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/ansible/awx-ee:latest
+         docker push ${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
