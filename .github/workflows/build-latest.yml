@@ -23,18 +23,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install tox
+          pip install -r requirements.txt
 
       - name: Quay login
         run: |
           echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
 
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
+      - name: Build and push image
         run: |
-          tox -e docker -- --tag=${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
-
-      - name: Push images
-        run: |
-         docker push ${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
+          docker buildx create --name awx-ee-buildx
+          docker buildx use awx-ee-buildx
+          ansible-builder create -v3 --output-file=Dockerfile
+          docker buildx build \
+            --push \
+            --platform=linux/amd64,linux/arm64 \
+            --tag=${{ vars.IMAGE_REGISTRY }}/awx-ee:latest \
+            context
