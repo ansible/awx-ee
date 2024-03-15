@@ -24,6 +24,7 @@ dependencies:
       - name: kubernetes.core
       - name: ansible.posix
       - name: ansible.windows
+      - name: ansible.utils
       - name: redhatinsights.insights
   system: |
     git-core [platform:rpm]
