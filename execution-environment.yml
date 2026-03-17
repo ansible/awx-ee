@@ -48,6 +48,7 @@ dependencies:
     make [platform:rpm compile]
     openssl-devel [platform:rpm compile]
   python: |
+    git+https://github.com/ansible/awx.git@devel#subdirectory=awxkit
     git+https://github.com/ansible/ansible-sign
     ncclient
     paramiko
