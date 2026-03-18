@@ -68,6 +68,7 @@ additional_build_steps:
   append_final:
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
+    - RUN update-crypto-policies --set DEFAULT:SHA1
     - RUN git lfs install --system
     # SymLink `python` -> `python3.12`
     - RUN alternatives --install /usr/bin/python python /usr/bin/python3.12 312
