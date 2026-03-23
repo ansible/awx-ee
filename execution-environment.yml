@@ -28,6 +28,10 @@ dependencies:
       - name: ansible.windows
       - name: redhatinsights.insights
       - name: kubevirt.core
+      - name: community.general
+      - name: community.docker
+      - name: community.crypto
+      - name: community.aws
   system: |
     git-core [platform:rpm]
     python3.12-devel [platform:rpm compile]
