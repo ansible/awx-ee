@@ -26,6 +26,8 @@ jobs:
           pip install tox
 
       - name: Build EE with Podman
+        env:
+          IMAGE_REGISTRY: ${{ vars.IMAGE_REGISTRY }}
         run: |
           tox -e podman
 
@@ -47,5 +49,6 @@ jobs:
       - name: Build EE with Docker
         env:
           DOCKER_BUILDKIT: 1
+          IMAGE_REGISTRY: ${{ vars.IMAGE_REGISTRY }}
         run: |
           tox -e docker

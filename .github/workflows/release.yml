@@ -24,15 +24,16 @@ jobs:
       - name: Build image
         env:
           DOCKER_BUILDKIT: 1
+          IMAGE_REGISTRY: ${{ vars.IMAGE_REGISTRY }}
         run: |
-          tox -e docker -- --tag=quay.io/ansible/awx-ee:${{ github.event.release.tag_name }}
+          tox -e docker -- --tag=${{ vars.IMAGE_REGISTRY }}/awx-ee:${{ github.event.release.tag_name }}
 
       - name: Apply latest tag
         run: |
-         docker tag quay.io/ansible/awx-ee:${{ github.event.release.tag_name }} quay.io/ansible/awx-ee:latest
+         docker tag ${{ vars.IMAGE_REGISTRY }}/awx-ee:${{ github.event.release.tag_name }} ${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
 
       - name: Push images
         run: |
          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/ansible/awx-ee:${{ github.event.release.tag_name }}
-         docker push quay.io/ansible/awx-ee:latest
+         docker push ${{ vars.IMAGE_REGISTRY }}/awx-ee:${{ github.event.release.tag_name }}
+         docker push ${{ vars.IMAGE_REGISTRY }}/awx-ee:latest
