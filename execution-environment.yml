@@ -14,6 +14,7 @@ dependencies:
   galaxy: |
     ---
     collections:
+      - name: community.general
       - name: awx.awx
       - name: azure.azcollection
         version: ">=2.1.0"
@@ -65,6 +66,7 @@ dependencies:
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip
+    - ENV ANSIBLE_STDOUT_CALLBACK=ansible.builtin.default
   append_final:
     - COPY --from=quay.io/ansible/receptor:devel /usr/bin/receptor /usr/bin/receptor
     - RUN mkdir -p /var/run/receptor
