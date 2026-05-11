@@ -11,6 +11,7 @@ on:
 
 jobs:
   build_and_push_latest:
+    if: github.repository == 'ansible/awx-ee'
     runs-on: ubuntu-latest
     name: Build and push latest tag from devel and on new commits
     steps:
